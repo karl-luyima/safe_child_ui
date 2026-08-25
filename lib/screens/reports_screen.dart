@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'report_details_screen.dart';
 
 class ReportsScreen extends StatefulWidget {
   const ReportsScreen({super.key});
@@ -20,7 +21,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Reports"), backgroundColor: Colors.white, foregroundColor: Colors.black),
+      appBar: AppBar(
+        title: const Text("Reports"), 
+        backgroundColor: Colors.white, 
+        foregroundColor: Colors.black
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -43,7 +48,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 backgroundColor: Colors.red,
                 minimumSize: const Size.fromHeight(50),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReportDetailsScreen(statusType: selectedStatus),
+                  ),
+                );
+              },
               child: const Text("Generate Report", style: TextStyle(color: Colors.white)),
             )
           ],

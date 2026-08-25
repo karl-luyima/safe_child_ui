@@ -11,12 +11,13 @@ class DriverHomeScreen extends StatefulWidget {
 }
 
 class _DriverHomeScreenState extends State<DriverHomeScreen> {
+  // Verifies scanned/entered codes against local state and gives user feedback
   void _processCode(String code) {
     bool success = MockDataRepository.verifyAndDropOff(code);
 
     if (context.mounted) {
       if (success) {
-        setState(() {}); // Refresh UI state to reflect updated counts
+        setState(() {}); // Refreshes dashboard statistics dynamically
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Success! Student marked as dropped off. Code: $code"),
@@ -26,7 +27,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Invalid Code: '$code'. Try SC1250 or 123456"),
+            content: Text("Invalid Code: '$code'. Try SC1250, SC6523, or 123456"),
             backgroundColor: Colors.red,
           ),
         );
@@ -41,7 +42,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header Curve
+            // Header Red Curve
             Stack(
               alignment: Alignment.bottomCenter,
               children: [
@@ -68,7 +69,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
             const SizedBox(height: 10),
             const Text("Shuttle Driver", style: TextStyle(color: Colors.red, fontWeight: FontWeight.w500)),
 
-            // Driver Detail Card
+            // Driver Card
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               padding: const EdgeInsets.all(12),
@@ -85,25 +86,25 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
               ),
             ),
 
-            // Statistics Row (Connected dynamically to MockDataRepository)
+            // Dynamic Statistics Row
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
                 children: [
                   Expanded(
                     child: _buildStatCard(
-                      "Students Onboard", 
-                      MockDataRepository.onboardCount.toString(), 
-                      Icons.directions_bus
-                    )
+                      "Students Onboard",
+                      MockDataRepository.onboardCount.toString(),
+                      Icons.directions_bus,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: _buildStatCard(
-                      "Total Drop Off", 
-                      MockDataRepository.dropOffCount.toString(), 
-                      Icons.face
-                    )
+                      "Total Drop Off",
+                      MockDataRepository.dropOffCount.toString(),
+                      Icons.face,
+                    ),
                   ),
                 ],
               ),
@@ -119,7 +120,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 onPressed: () {
-                  // Bulk drop off logic
                   _processCode("123456");
                 },
                 child: const Text("Bulk Drop Off", style: TextStyle(color: Colors.white, fontSize: 16)),

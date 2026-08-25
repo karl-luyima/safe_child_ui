@@ -13,6 +13,8 @@ dependencies:
   qr_flutter: ^4.1.0          # Generates QR codes for parents
   pinput: ^5.0.0              # Styled 6-digit input fields
   cupertino_icons: ^1.0.6
+  http: ^1.2.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
