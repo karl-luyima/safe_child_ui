@@ -1,0 +1,23 @@
+name: safe_child_ui
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobile_scanner: ^5.0.0      # Camera access to scan QR codes
+  qr_flutter: ^4.1.0          # Generates QR codes for parents
+  pinput: ^5.0.0              # Styled 6-digit input fields
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
